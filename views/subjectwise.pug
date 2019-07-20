@@ -1,0 +1,16 @@
+extends layout
+
+block content
+	h1(align='center') SUBJECTWISE TEST
+	h5(align='center', style='color: #B22222') (You Can Select Only One Subject)
+	div(align='left', style='margin: 0px 300px 0px 300px')
+		form(style='margin-top: 50px', action='/subjectwise_test', method='POST')
+			each subject, i in subjects
+				.funkyradio
+					.funkyradio-success
+						input(id=subject,type='radio', value=subject,name='subject')
+						label(for=subject, style='padding: 10px 10px 10px 50px') #{subject}
+					br
+			br
+			div(align='center')
+				input.btn.btn-success(type='submit', value='Submit')

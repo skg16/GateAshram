@@ -1,0 +1,11 @@
+.container(style='font-family: Belleza ; font-size:20px ;')
+    form(style='margin-top: 100px', action='/subjectwise_test', method='POST')
+          each subject, i in subjects
+            .radio
+              label
+                input(type='radio', value=subject,name='subject')
+                | #{subject}
+                  
+                
+          hr
+          button.final(type='submit', value='Submit') Submit

@@ -1,0 +1,128 @@
+extends layout
+
+block content
+
+	.container(style='font-family: Belleza ; font-size:20px')
+
+		h3(style='margin-top: 10%')
+			center #{topic}
+		.progress(style='z-index: 0; position:fixed ; width:80%;height:1rem ; right : 10% ; left:10%;top:10px;display: none')
+			.progress-bar.bg-success(role='progressbar', style='width: 0%;z-index: 0; position:fixed ;height:20px ; right : 10% ; left:10%;top:10px;display: none', aria-valuenow='25', aria-valuemin='0', aria-valuemax='100')
+		hr
+
+		script.
+			var ans=[];
+
+		each question, i in questions
+
+			script.
+				ans.push("#{question.Answer}");
+
+			div(style='margin-top: 5%')
+				p #{(i+1)}. #{question.Question}
+			hr
+			div
+				ol(type='A')
+					li #{question.Option_A}
+					hr
+					li #{question.Option_B}
+					hr
+					li #{question.Option_C}
+					hr
+					li #{question.Option_D}
+				hr
+				p(style='display : none')
+
+		div(style='margin-left:55% ; margin-bottom: 10%')
+			a(href='/subjects/'+subject+'/'+topic+'/questions')
+				button.btn.btn-outline-primary(type='button') Give the Test Again
+			a(href='/subjects/'+subject)
+				button.btn.btn-outline-primary(type='button') BACK
+
+	script.
+		var s = document.querySelectorAll(".container div ol li");
+		var s2 = document.querySelector(".progress-bar");
+		var s1 = document.querySelectorAll(".container div p");
+		var s4 = document.querySelector(".progress");
+
+		var prog = 0;
+
+		var nq=s.length/4;
+		var arr = [];
+		var arr1 = [];
+		var b = [];
+
+		for(var i = 0;i<nq;i++){
+			arr1.push(true);
+			b.push(true);
+			//- ans.push("C");
+			if(ans[i]=="A")
+				arr.push(0);
+			else if(ans[i]=="B")
+				arr.push(1);
+			else if(ans[i]=="C")
+				arr.push(2);
+			else
+				arr.push(3);
+		}
+
+		//- var arr1 =[true , true ,true];
+		//- var arr = [2,0,3];
+		//- var prog = 0;
+		//- var ans = ["Option C" , "Option A" , "Option D"];
+		//- arr.push(3);
+		//- console.log("hello");
+		//- var b = [];
+		//- b.push(true);
+		//- b.push(true);
+		//- b.push(true);
+		function value(k){
+			return function(){
+				s4.style.display = "block";
+				s2.style.display = "block";
+				if(arr1[Math.floor(k/4)]){
+					prog = prog + (80/nq);
+					s2.style.width = prog +"%";
+					arr1[Math.floor(k/4)] = false;
+				}
+				if(b[Math.floor(k/4)]){
+					s1[Math.floor(k/4)*2+1].style.color = "green";
+					s1[Math.floor(k/4)*2+1].style.textAlign = "center";
+					s1[Math.floor(k/4)*2+1].innerHTML ="Correct Answer";
+					this.style.color = "green";
+					s1[Math.floor(k/4)*2+1].style.display = "block";
+					b[Math.floor(k/4)] = false;
+				}
+			}
+		}
+		function value2(k){
+			return function(){
+				s4.style.display = "block";
+				s2.style.display = "block";
+				if(arr1[Math.floor(k/4)]){
+					prog = prog + (80/nq);
+					s2.style.width = prog +"%";
+					arr1[Math.floor(k/4)] = false;
+				}
+				if(b[Math.floor(k/4)]){
+					s1[Math.floor(k/4)*2+1].style.color = "red";
+					s1[Math.floor(k/4)*2+1].style.textAlign = "center";
+					s1[Math.floor(k/4)*2+1].innerHTML ="Wrong Answer";
+					s1[Math.floor(k/4)*2+1].innerHTML ="Wrong Answer"+"<br />"+"Correct Answer is : " + ans[Math.floor(k/4)];
+					this.style.color = "red";
+					s1[Math.floor(k/4)*2+1].style.display = "block";
+					b[Math.floor(k/4)] = false;
+				}
+			}
+		}
+		for(var i = 0;i<s.length;i++){
+			s[i].addEventListener(("mouseover") , function(){
+				this.style.cursor = "pointer";
+			});
+			if(i == (Math.floor(i/4)*4 + arr[Math.floor(i/4)])){
+				s[i].addEventListener(("click") , value(i));
+			}
+			else{
+				s[i].addEventListener(("click") , value2(i));
+			}
+		}

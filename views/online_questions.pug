@@ -1,0 +1,193 @@
+extends layout
+
+block content	
+
+	script.
+		var arr1 =[];
+		var ans = [];
+		var arr = [];
+		var b = [];
+	div(style='float : right ; text-align: center;position: fixed;top:52px;right:20px')
+		div(style='float : left ; height:25px;width:49px;') Hour 
+		div(style='float : left ;height:25px;width:68px') Minutes  
+		div(style='float :left; height:25px;width:70px') Second  
+		br
+		hr(style='margin:0px')
+		.hour(style='float:left ;height:25px;width:49px') #{hr}
+		.minute(style='float:left;height:25px;width:68px') #{min}
+		.second(style=' float:left;height:25px;width:46px') #{sec}
+		br
+	div(style='clear:both')
+	.container(style='font-family: Belleza ; font-size:20px')
+		.alert.alert-success(style='display : none ; margin-top : 7%; z-index : -1; text-align:center', role='alert')
+		h3(style='margin-top: 10%')
+			center QUESTIONS
+		.progress(style=' z-index : -2 ;border: 1px solid black;display :none ;height: 1rem ; width : 40%; left: -15%;right:30%; top:49%;bottom:49%;top: 49%;-webkit-transform: rotate(-90deg);transform: rotate(-90deg);position:fixed')
+			each questions, i in allquestion
+				.progress-bar(role='progressbar', style=' z-index : -2 ;height:1rem;width:=10;display:block;float:left;background:white;color:white', aria-valuenow='0', aria-valuemin='0', aria-valuemax='100') #{i+1}
+		hr
+		script.
+			var len = 0;
+			
+		each question, i in allquestion
+			script.
+				arr1.push(true);
+				b.push(true);
+				len++;
+				ans.push("#{question.Answer}")
+				if("#{question.Answer}"=="A")
+					arr.push(0); 
+				if("#{question.Answer}"=="B")
+					arr.push(1); 
+				if("#{question.Answer}"=="C")
+					arr.push(2); 
+				if("#{question.Answer}"=="D")
+					arr.push(3);
+			div(style='margin-top: 5%')
+				p #{(i+1)}.#{question.Question} 
+					br
+					span(style='color:red;margin-left : 55%')
+						| [#{question.Gate_Year}  Marks : #{question.Marks}  Topic : #{question.Topic}]
+			hr
+			div
+				ol(type='A')
+					li #{question.Option_A}
+					hr
+					li #{question.Option_B}
+					hr
+					li #{question.Option_C}
+					hr
+					li #{question.Option_D}
+				hr
+				p(style='display : none')
+		
+		div(style='margin-left:40% ; margin-bottom: 10%')
+			a(onclick='window.location.reload(true)')
+				button.btn.btn-outline-primary(type='button') Give the Test Again
+			//- a(href='/custom_test')
+			//- 	button.btn.btn-outline-primary(type='button') BACK
+			a(href='#')
+				button#sub.btn.btn-outline-primary(type='button') SUBMIT
+	script.
+		//- console.log(arr);
+		// alert("DO you want to give the test ?");
+		var butt = document.querySelectorAll("#sub");
+		var s = document.querySelectorAll(".container div ol li");
+		//var s2 = document.querySelectorAll(".progress-bar");
+		var s1 = document.querySelectorAll(".container div p");
+		//var s4 = document.querySelector(".progress");
+		var prog = 0;
+		var result = 0;
+
+		function value(k){
+			return function(){
+				
+				//- if(arr1[Math.floor(k/4)])
+				//- { 
+				//- 	prog = (100/len);
+				//- 	result++;
+				//- 	s2[Math.floor(k/4)].style.background = "green";
+				//- 	s2[Math.floor(k/4)].style.display = "block";
+					
+				//- 	arr1[Math.floor(k/4)] = false;
+				//- }
+				if(b[Math.floor(k/4)])
+				{
+					result++;
+					s1[Math.floor(k/4)*2+1].style.color = "green";
+					s1[Math.floor(k/4)*2+1].style.textAlign = "center";
+					s1[Math.floor(k/4)*2+1].innerHTML ="Correct Answer";
+					// this.style.color = "green";
+					this.style.border = "2px solid yellow";
+					this.style.borderRadius = "25px";
+					// s1[Math.floor(k/4)*2+1].style.display = "block";
+					b[Math.floor(k/4)] = false;
+				}
+			}
+		}
+		function value2(k){
+			return function(){
+				
+				//- if(arr1[Math.floor(k/4)])
+				//- {  
+				//- 	prog = (100/len);
+				//- 	s2[Math.floor(k/4)].style.display = "block";
+				//- 	s2[Math.floor(k/4)].style.background = "tomato";
+					
+				//- 	arr1[Math.floor(k/4)] = false;
+				//- }
+				if(b[Math.floor(k/4)])
+				{   
+					s1[Math.floor(k/4)*2+1].style.color = "red";
+					s1[Math.floor(k/4)*2+1].style.textAlign = "center";
+					s1[Math.floor(k/4)*2+1].innerHTML ="Wrong Answer";
+					s1[Math.floor(k/4)*2+1].innerHTML ="Wrong Answer"+"<br />"+"Correct Answer is : " + ans[Math.floor(k/4)];
+					this.style.border = "2px solid yellow";
+					this.style.borderRadius = "25px";
+					// s1[Math.floor(k/4)*2+1].style.display = "block";
+					b[Math.floor(k/4)] = false;
+				}
+			}
+		}
+
+		//console.log(s.length);
+		for(var i = 0;i<s.length;i++){
+			s[i].addEventListener(("mouseover") , function(){
+				this.style.cursor = "pointer";
+			});
+			if(i == (Math.floor(i/4)*4 + arr[Math.floor(i/4)]))
+			{
+				s[i].addEventListener(("click") , value(i));
+			} 
+			else{
+				s[i].addEventListener(("click") , value2(i));
+			}
+		}
+
+		butt[0].addEventListener(("click") , function(){
+			var ale = document.querySelector(".alert");
+			ale.style.display = "block";
+			ale.innerHTML = "congratulations your Score is : " + result +"/"+len;
+			// s2.style.display = "block";
+			//s4.style.display = "block";
+			for(var i = 1 ; i<s1.length ; i =i+2){
+				s1[i].style.display = "block";
+				clearInterval(myVar);
+			}
+		});
+
+		var a = document.querySelector(".second");
+		var sec1 = parseInt(a.innerHTML);
+		var a1 = document.querySelector(".minute");
+		var min1 = parseInt(a1.innerHTML);
+		var a2 = document.querySelector(".hour");
+		var hour1 = parseInt(a2.innerHTML);
+
+		var myVar = setInterval(function(){
+			if(sec1 == 0){
+				if(min1!=0){
+					min1--;
+					sec1 = 59;
+				}
+				else if(hour1 !=0){
+					hour1--;
+					min1 = 59;
+					sec1 = 59;
+				}
+				else {
+					window.clearInterval();
+					s4.style.display = "block";
+					for(var i = 1 ; i<s1.length ; i =i+2){
+						s1[i].style.display = "block";
+					}
+				}
+			}
+			if(sec1>=0){
+				a.innerText = sec1--;
+				a1.innerText = min1;
+				a2.innerText = hour1;
+			}
+		}, 1000);
+		// window.setTimeout(function(){
+		// 	alert("you are in danger");
+		// } , 5000);

@@ -1,0 +1,215 @@
+doctype html
+html(lang='en')
+  head
+    title Header
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css')
+    link(href='https://fonts.googleapis.com/css?family=Montserrat', rel='stylesheet')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js')
+    link(href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css', rel='stylesheet', integrity='sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN', crossorigin='anonymous')
+    link(rel='stylesheet', src='style.css')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+    style.
+      body {
+      margin:0;
+      font-family:'Montserrat';
+      }
+
+      .funkyradio div {
+      clear: both;
+      overflow: hidden;
+      }
+      .funkyradio label {
+      width: 100%;
+      border-radius: 5px;
+      border: 3px solid #D1D3D4;
+      font-weight: normal;
+      }
+      .funkyradio input[type="radio"]:empty,
+      .funkyradio input[type="checkbox"]:empty {
+      display: none;
+      }
+      .funkyradio input[type="radio"]:empty ~ label,
+      .funkyradio input[type="checkbox"]:empty ~ label {
+      position: relative;
+      line-height: 2.5em;
+      text-indent: 3.25em;
+      margin-top: 2em;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      }
+      .funkyradio input[type="radio"]:empty ~ label:before,
+      .funkyradio input[type="checkbox"]:empty ~ label:before {
+      position: absolute;
+      top: 10px;
+      bottom: 10px;
+      left: 10px;
+      right: 10px;
+      content: '';
+      width: 2.5em;
+      background: #D1D3D4;
+      border-radius: 3px 0 0 3px;
+      }
+      .funkyradio input[type="radio"]:hover:not(:checked) ~ label,
+      .funkyradio input[type="checkbox"]:hover:not(:checked) ~ label {
+      color: green;
+      }
+      .funkyradio input[type="radio"]:hover:not(:checked) ~ label:before,
+      .funkyradio input[type="checkbox"]:hover:not(:checked) ~ label:before {
+      content: '\2714';
+      text-indent: .9em;
+      color: #C2C2C2;
+      }
+      .funkyradio input[type="radio"]:checked ~ label,
+      .funkyradio input[type="checkbox"]:checked ~ label {
+      color: #777;
+      }
+      .funkyradio input[type="radio"]:checked ~ label:before,
+      .funkyradio input[type="checkbox"]:checked ~ label:before {
+      content: '\2714';
+      text-indent: .9em;
+      color: #333;
+      background-color: #ccc;
+      }
+      .funkyradio input[type="radio"]:focus ~ label:before,
+      .funkyradio input[type="checkbox"]:focus ~ label:before {
+      box-shadow: 0 0 0 300px #008B8B;
+      }
+      .funkyradio-default input[type="radio"]:checked ~ label:before,
+      .funkyradio-default input[type="checkbox"]:checked ~ label:before {
+      color: #008B8B;
+      background-color: #008B8B;
+      }
+      .funkyradio-success input[type="radio"]:checked ~ label:before,
+      .funkyradio-success input[type="checkbox"]:checked ~ label:before {
+      color: #fff;
+      background-color: #008B8B;
+      }
+
+      #myBtn {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 30px;
+      z-index: 99;
+      font-size: 18px;
+      border: none;
+      outline: none;
+      background-color: #595d60;
+      color: white;
+      cursor: pointer;
+      padding: 15px;
+      border-radius: 4px;
+      }
+      #myBtn:hover {
+      background-color: #595d60;
+      color: white;
+      }
+      ::-webkit-scrollbar {
+      width: 10px;
+      }
+      ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      }
+      ::-webkit-scrollbar-thumb {
+      background: #888;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+      }
+
+      
+  body
+    nav.navbar.navbar-expand-sm.bg-dark.navbar-dark.fixed-top
+      // Brand
+      a.navbar-brand(href='/')
+        img.d-inline-block.align-top(src='/img/Logo.png', width='30', height='30', alt='')
+        |  GATE ASHRAM
+      button.navbar-toggler(type='button', data-toggle='collapse', data-target='#collapsibleNavbar')
+        span.navbar-toggler-icon
+      // Links
+      #collapsibleNavbar.collapse.navbar-collapse
+        ul.navbar-nav
+          //dropdown
+          li.nav-item.dropdown
+            a#navbardrop.nav-link.dropdown-toggle(href='#', data-toggle='dropdown') ONLINE TEST
+            .dropdown-menu
+              a.dropdown-item(href='/full_test') Full Test
+              a.dropdown-item(href='/subjectwise_test') Subjectwise Test
+              a.dropdown-item(href='/custom_test') Custom Test
+          // Dropdown
+          li.nav-item.dropdown
+            a.nav-link(style='float: left;padding-right: 0px', href='/subjects', aria-haspopup='true', aria-expanded='false') SUBJECTS
+            a#navbarDropdownMenuLink.nav-link.dropdown-toggle(style='float: left;padding-left: 0px', href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+            .dropdown-menu
+              each subject, i in subjects
+                a.dropdown-item(href='/subjects/'+subject) #{subject}
+          li.nav-item
+            a.nav-link(href='/about') ABOUT US
+        div.navbar-nav.flex-row.ml-md-auto
+          a.btn.btn-outline-info(href='#login', role='button', aria-pressed='true') LOGIN
+          a.btn.btn-outline-info(href='#signup', role='button', aria-pressed='true') SIGN UP
+    
+    .container(style='padding-top: 60px;')
+      block content
+      br
+      hr 
+
+    
+    button#myBtn(onclick='topFunction()', title='Go to top') ^
+
+    footer.page-footer.font-small.bg-dark.pt-4(style='color: white;')
+      .container-fluid.text-center.text-md-left
+        .row
+          hr.clearfix.w-100.d-md-none.pb-3
+          .col-md-4.mb-md-0.mb-3(style='text-align: left;')
+            h5.text-uppercase(style='padding-bottom: 10px;')     CONNECT:
+            ul.list-unstyled
+              li(style='margin: 10px')
+                a(href='https://facebook.com/', target='_blank', rel='noopener', aria-label='Facebook', style='margin:7px;')
+                  img(src='/img/FB.png', width='40', height='40', alt='Facebook')
+                a(href='https://instagram.com/', target='_blank', rel='noopener', aria-label='Instagram', style='margin:7px;')
+                  img(src='/img/Insta.png', width='35', height='35', alt='Instagram')
+                a(href='https://linkedin.com/', target='_blank', rel='noopener', aria-label='LinkedIn', style='margin:7px;')
+                  img(src='/img/LinkedIn.png', width='40', height='40', alt='LinkedIn')
+                a(href='https://github.com/', target='_blank', rel='noopener', aria-label='GitHub', style='margin:7px;')
+                  img(src='/img/GitHub.png', width='35', height='35', alt='GitHub')
+                a(href='https://youtube.com/', target='_blank', rel='noopener', aria-label='YouTube', style='margin:7px;')
+                  img.d-inline-block.align-top(src='/img/YT.png', width='40', height='40', alt='YouTube')
+                a(href='https://gmail.com/', target='_blank', rel='noopener', aria-label='Gmail', style='margin:7px;')
+                  img.d-inline-block.align-top(src='/img/gmail.png', width='40', height='40', alt='Gmail')
+            
+          .col-md-3.mb-md-0.mb-3
+          .col-md-5.mt-md-0.mt-3(style='text-align: right;')
+            h5.text-uppercase REACH US:
+            h6.text-uppercase
+              | NATIONAL INSTITUTE OF TECHNOLOGY, JAMSHEDPUR
+              h7
+                p P.O: NIT Jamshedpur, Jharkhand, India, PIN: 831014
+              h8 Director: +91-657-237-4108(O)
+              h9
+                p +91-657-237-3246(Fax)
+      .footer-copyright.text-center.py-3
+        | ©Copyright:
+        a(href='https://mdbootstrap.com/education/bootstrap/') WebTeam
+    script.
+      window.onscroll = function() {scrollFunction()};
+      function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      document.getElementById("myBtn").style.display = "block";
+      } else {
+      document.getElementById("myBtn").style.display = "none";
+      }
+      }
+      function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+      }

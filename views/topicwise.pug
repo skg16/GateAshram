@@ -1,0 +1,239 @@
+extends layout
+
+block content
+
+	.container(style='font-family: Belleza ; font-size:20px ;text-align: center;')
+		//- button.btn.btn-success(style='position:absolute; top:60px;left:20px') TEST
+		div(style='float : right ; text-align: center;position: fixed;top:52px;right:20px')
+			div(style='float : left ; height:25px;width:49px;') Hour 
+			div(style='float : left ;height:25px;width:68px') Minutes  
+			div(style='float :left; height:25px;width:70px') Second  
+			br
+			hr(style='margin:0px')
+			.hour(style='float:left ;height:25px;width:49px') 00
+			.minute(style='float:left;height:25px;width:68px') 00
+			.second(style=' float:left;height:25px;width:46px') 00
+			br
+		div(style='clear:both')
+			form#form1(style='margin-top: 100px', action='/custom_test', method='POST')
+				each sub, i in allsub
+					div
+						h3 #{sub.subject}
+						.topic(style='display: none')
+							each etopic, i in sub.topics
+								input(type='hidden', value= sub.subject, name='subject')
+								input(type='hidden', value= etopic.topic, name='topic')
+								div
+									i.fa.fa-snowflake-o(aria-hidden='true', style='float : left')
+									h2 #{etopic.topic}
+									.option(style='display: none')
+										label(for='one') 1 Mark
+										input.hello(type='number', name='oneM', min='0', max='10')
+										br
+										p.warn
+										label(for='two') 2 Mark
+										input.hello(type='number', name='twoM', min='0', max='10')
+										br
+										p.warn
+							
+					hr
+				
+				button.final(type='submit', form='form1', value='Submit') Submit
+				// <button type="submit" style="margin-left: 70%"class = "btn btn-success">Go for Test</button>
+		hr
+		hr
+	script.
+		var  s = document.querySelectorAll("form h3");
+		var  s1 = document.querySelectorAll(".topic");
+		var  s2 = document.querySelectorAll("form h2");
+		var  s3 = document.querySelectorAll(".option");
+		var  s4 = document.querySelectorAll(".hello");
+		var  s5 = document.querySelectorAll(".warn");
+		var hr1  = document.querySelector(".hour");
+		var min = document.querySelector(".minute");
+		var sec = document.querySelector(".second");
+		var but = document.querySelector(".final");
+		var time = 0;
+		var value = 0;
+		var inp = [];
+		var hr = 0;
+		var mn = 0;
+		var sc = 0;
+		var oMark =0;
+		var tMark =0;
+		var loc1 = [];
+		var loc2 = [];
+		var pp = 0;
+		function disp(k)
+		{
+		return function(){
+		if(loc2[k] == true)
+		{ s[k].style.color = "green";
+		s1[k].style.display = "block";
+		loc2[k] = false;
+		}
+		else
+		{   s[k].style.color = "black";
+		var z = s1[k].querySelectorAll("h2");
+		var z1 = s1[k].querySelectorAll(".option");
+		for(var j = 0; j<z.length ; j++)
+		{
+		z[j].style.color = "black";
+		z1[j].style.display = "none";
+		}
+		for(var j = 0 ; j<k ;j++)
+		{
+		pp = pp + s1[j].querySelectorAll(".hello").length;
+		}
+		console.log("value of pp" +pp);
+		var p = s1[k].querySelectorAll(".hello");
+		console.log("lenght" +p.length);
+		// console.log("ttt" +tMark);
+		// 	console.log("ttt" +oMark);
+		for(var i = 0;i<p.length;i++)
+		{  console.log(p[i].value);
+		if(i%2==1)
+		{
+		tMark = tMark +parseInt(p[i].value);
+		p[i].value = 0;
+		}
+		else{
+		oMark = oMark + parseInt(p[i].value);
+		p[i].value = 0;
+		}
+		// console.log(oMark);
+		// console.log(tMark);
+		inp[pp+i] =0;
+		}
+		pp = 0;
+		time = time - oMark - (2*tMark);
+		total = time * 1.8;
+		hr = Math.floor(total/60);
+		total = total %60;
+		mn = Math.floor(total);
+		sc = Math.floor((total - mn)*60);
+		hr1.innerHTML = hr;
+		min.innerHTML = mn;
+		sec.innerHTML = sc;
+		oMark = 0;
+		tMark = 0;
+		s1[k].style.display = "none";
+		loc2[k] = true;
+		}
+		}
+		}
+		function value1(k)
+		{
+		return function(){
+		if(loc1[k] == true)
+		{ s2[k].style.color = "green";
+		s3[k].style.display = "block";
+		loc1[k] = false;
+		}
+		else{
+		s2[k].style.color = "black";
+		oMark = parseInt(s4[(k*2)].value);
+		tMark = parseInt(s4[(k*2) +1].value);
+		s4[(k*2)].value = 0;
+		s4[(k*2) +1].value = 0;
+		// 			console.log("k" + k);
+		inp[k*2] = 0;
+		inp[k*2+1] = 0;
+		// 			console.log("one "+oMark);
+		// 			console.log(tMark);
+		// 			console.log(time);
+		time = time - oMark - (2*tMark);
+		total = time * 1.8;
+		hr = Math.floor(total/60);
+		total = total %60;
+		mn = Math.floor(total);
+		sc = Math.floor((total - mn)*60);
+		hr1.innerHTML = hr;
+		min.innerHTML = mn;
+		sec.innerHTML = sc;
+		oMark = 0;
+		tMark = 0;
+		s3[k].style.display = "none";
+		loc1[k] = true;
+		}
+		}
+		}
+		function inpValue(k)
+		{
+		return function(){
+		value = parseInt(this.value);
+		if(value > this.max)
+		{
+		s5[k].style.color = "red";
+		s5[k].innerHTML = "enter less than"+ this.max;
+		s5[k].style.display = "block";
+		}
+		else
+		{
+		s5[k].style.display = "none";
+		// 	console.log("from here " +inp[k]);
+		if(k%2 ==1)
+		{
+		temp1 = value - inp[k];
+		time = time + 2*temp1;
+		}
+		else
+		{
+		temp1 = value - inp[k];
+		time = time + temp1;
+		}
+		// 	console.log(time);
+		inp[k] = value;
+		total = time * 1.8;
+		hr = Math.floor(total/60);
+		total = total %60;
+		mn = Math.floor(total);
+		sc = Math.floor((total - mn)*60);
+		hr1.innerHTML = hr;
+		min.innerHTML = mn;
+		sec.innerHTML = sc;
+		// 	console.log(time);
+		// 	console.log( "hour" +hr);
+		// 		console.log("Minute" +mn);
+		// 	console.log("second"+sc);
+		}
+		}
+		}
+		for(var i = 0;i<s2.length;i++)
+		{   inp.push(0);
+		inp.push(0);
+		loc1.push(true);
+		s2[i].addEventListener("mouseover" , function(){
+		this.style.cursor = "pointer";
+		});
+		s2[i].addEventListener("click" , value1(i));
+		}
+		for(var i = 0;i<s4.length;i++)
+		{  s4[i].value = 0;
+		s4[i].addEventListener("change" , inpValue(i));
+		}
+		but.addEventListener("click" , function(){
+		var element = document.getElementById("form1");
+		var input = document.createElement("input");
+		input.setAttribute('name', "hour");
+		input.setAttribute('value', hr);
+		input.setAttribute('type', 'hidden');
+		element.appendChild(input);
+		var input = document.createElement("input");
+		input.setAttribute('name', "minute");
+		input.setAttribute('value', mn);
+		input.setAttribute('type', 'hidden');
+		element.appendChild(input);
+		var input = document.createElement("input");
+		input.setAttribute('name', "second");
+		input.setAttribute('value', sc);
+		input.setAttribute('type', 'hidden');
+		element.appendChild(input);
+		} );
+		for(var i = 0;i<s.length;i++)
+		{  loc2.push(true);
+		s[i].addEventListener("mouseover" , function(){
+		this.style.cursor = "pointer";
+		});
+		s[i].addEventListener("click" , disp(i));
+		}

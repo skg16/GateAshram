@@ -1,0 +1,74 @@
+extends layout
+
+block content  
+	.container
+		.col-sm-12(style='margin-bottom:30px;')
+			.row
+				.col-sm-12(align='center', style='padding:20px 20px;')
+					h2
+						u(style='color:#39464E;') SUBJECTS
+			.row(style='padding-left: 42px;')
+				each subject, i in subjects
+					.col-xs-12.col-sm-6.col-md-4(style='padding-top:10px')
+						a(href='./subjects/'+subject)
+							.card(style='width: 18rem;')
+								img(src='/img/'+subject+'.png', width='auto', height='150', alt='Image Not Avaiable')
+								.card-title(align='center')
+									span.card-text(align='center') #{subject}
+			//- 	.col-xs-12.col-sm-6.col-md-4(style='padding-top:10px')
+			//- 		a(href='#os')
+			//- 			.card(style='width: 18rem;')
+			//- 				img(src='/img/OS.png', width='auto', height='150', alt='Image Not Avaiable')
+			//- 				.card-title(align='center')
+			//- 					span.card-text(align='center') Operating Systems
+			//- 	.col-xs-12.col-sm-6.col-md-4(style='padding-top:10px')
+			//- 		a(href='#cn')
+			//- 			.card(style='width: 18rem;')
+			//- 				img(src='/img/CN.png', width='auto', height='150', alt='Image Not Available')
+			//- 				.card-title(align='center')
+			//- 					span.card-text(align='center') Computer Networks
+			//- .row(style='padding-left: 42px;')
+			//- 	.col-xs-12.col-sm-6.col-md-4(style='padding-top:10px')
+			//- 		a(href='#dbms')
+			//- 			.card(style='width: 18rem;')
+			//- 				img(src='/img/DBMS.png', width='auto', height='150', alt='Image Not Available')
+			//- 				.card-title(align='center')
+			//- 					span.card-text(align='center') Database Management System
+			//- 	.col-xs-12.col-sm-6.col-md-4(style='padding-top:10px')
+			//- 		a(href='#ds')
+			//- 			.card(style='width: 18rem;')
+			//- 				img(src='/img/DS.png', width='auto', height='150', alt='Image Not Available')
+			//- 				.card-title(align='center')
+			//- 					span.card-text(align='center') Data Structures
+			//- 	.col-xs-12.col-sm-6.col-md-4(style='padding-top:10px')
+			//- 		a(href='#algo')
+			//- 			.card(style='width: 18rem;')
+			//- 				img(src='/img/Algo.png', width='auto', height='150', alt='Image Not Available')
+			//- 				.card-title(align='center')
+			//- 					span.card-text(align='center') Algorithms
+			//- .row(style='padding-left: 42px;')
+			//- 	.col-xs-12.col-sm-6.col-md-4(style='padding-top:10px')
+			//- 		a(href='#toc')
+			//- 			.card(style='width: 18rem;')
+			//- 				img(src='/img/TOC.png', width='auto', height='150', alt='Image Not Available')
+			//- 				.card-title(align='center')
+			//- 					span.card-text(align='center') Theory Of Computation
+			//- 	.col-xs-12.col-sm-6.col-md-4(style='padding-top:10px')
+			//- 		a(href='#de')
+			//- 			.card(style='width: 18rem;')
+			//- 				img(src='/img/DE.png', width='auto', height='150', alt='Image Not Available')
+			//- 				.card-title(align='center')
+			//- 					span.card-text(align='center') Digital Electronics
+			//- 	.col-xs-12.col-sm-6.col-md-4(style='padding-top:10px')
+			//- 		a(href='#se')
+			//- 			.card(style='width: 18rem;')
+			//- 				img(src='/img/SE.png', width='auto', height='150', alt='Software Engineering')
+			//- 				.card-title(align='center')
+			//- 					span.card-text(align='center') Software Engineering
+			//- .row(style='padding-left: 42px;')
+			//- 	.col-xs-12.col-sm-6.col-md-4(style='padding-top:10px')
+			//- 		a(href='#coa')
+			//- 			.card(style='width: 18rem;')
+			//- 				img(src='/img/COA.png', width='auto', height='150', alt='Image Not Available')
+			//- 				.card-title(align='center')
+			//- 					span.card-text(align='center') Computer Architecture and Organisation
